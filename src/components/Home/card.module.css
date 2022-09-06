@@ -1,0 +1,57 @@
+body{
+    background-color: beige;
+}
+
+.Cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.Card{
+    border: 2px solid black;
+    background-color: whitesmoke;
+    text-align: center;
+    width: 250px;
+    min-height: 325px;
+    margin:1%;
+}
+
+.Card_Image{
+    width: 100%;
+    height: 200px;
+}
+
+
+.Card_Link{
+    color: red;
+    background-color: black;
+    border: 1px solid slategray;
+    border-radius: 5px;
+    font-size: larger;
+    text-decoration: none;
+}
+
+
+.button{
+    font-size: x-large;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: white;
+    background-color: royalblue;
+    height: 6vh;
+    width: 15%;
+    margin-left: 1%;
+}
+
+.search{
+    margin: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchbar{
+    width: 20%;
+    height: 5vh;
+}
