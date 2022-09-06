@@ -7,7 +7,7 @@ const Page404 =() =>{
         srcset="" 
         width="100%"
         height="80%"
-          />
+        />
      </Layout> 
     )
 }
