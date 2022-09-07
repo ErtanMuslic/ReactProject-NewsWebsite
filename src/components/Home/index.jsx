@@ -1,27 +1,31 @@
+import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import apiNews from "../../api/Api";
+import { UserContext } from "../LandingPage";
 import Layout from "../Layout";
 import style from "./home.module.css"
 
 const Home = (props) =>{
     const [news,setnews] = useState([]);
     const [search,SetSearch] = useState('');
-    const [page,setPage] = useState(20);
+    const [page,setPage] = useState(1);
     const [category,setCategory] = useState('general');
     const [newcategory,SetnewCategory] = useState('popularity');
     const [drop,setdrop] = useState(false);
+    const {setTitle,setImg,setAuthor,setContent,setDesc,setSource,setDate} = useContext(UserContext);
 
 
     const fetchNews = async (props) =>{
         try{
             let result;
             if(search!==''){
-                result = await apiNews.get(`everything?sortBy=${newcategory}&q=${search}&pageSize=20&apiKey=9770eaa81d774e98881c1153166cdbd2`);
+                result = await apiNews.get(`everything?sortBy=${newcategory}&q=${search}&pageSize=20&page=${page}&apiKey=9770eaa81d774e98881c1153166cdbd2`);
             }
             else
             {
-                result = await apiNews.get(`top-headlines?country=us&category=${category}&apiKey=9770eaa81d774e98881c1153166cdbd2`);
+                result = await apiNews.get(`top-headlines?country=us&category=${category}&page=${page}&apiKey=9770eaa81d774e98881c1153166cdbd2`);
             }
 
             const data = result.data.articles;
@@ -34,10 +38,20 @@ const Home = (props) =>{
         }
     }
 
+    const HandleProps = () =>{
+        setImg(props.img);
+        setTitle(props.title);
+        setContent(props.content);
+        setAuthor(props.author);
+        setDesc(props.description);
+        setDate(props.publishedAt);
+        setSource(props.source);
+    };
+
     useEffect(() =>{
          fetchNews();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[category,newcategory]);
+    },[category,newcategory,page]);
 
     console.log(news);
 
@@ -67,19 +81,19 @@ const Home = (props) =>{
             <div className={style.categories}>
                 {search!=='' ?(
                     <div>
-                    <p className={style.categoriesText} onClick={()=> {SetnewCategory('popularity')}}>Popularity</p>
-                    <p className={style.categoriesText} onClick={()=> {SetnewCategory('relevancy')}}>Relevancy</p>
-                    <p className={style.categoriesText} onClick={()=> {SetnewCategory('publishedAt')}}>Published At</p>
+                    <p className={style.categoriesText} onClick={()=> {SetnewCategory('popularity');setPage(1);}}>Popularity</p>
+                    <p className={style.categoriesText} onClick={()=> {SetnewCategory('relevancy');setPage(1);}}>Relevancy</p>
+                    <p className={style.categoriesText} onClick={()=> {SetnewCategory('publishedAt');setPage(1);}}>Published At</p>
                     </div>
                 ):(
                     <div>
-                    <p className={style.categoriesText} onClick={()=> {setCategory('general')}}>General</p>
-                    <p className={style.categoriesText} onClick={()=> {setCategory('business')}}>Business</p>
-                    <p className={style.categoriesText} onClick={()=> {setCategory('sports')}}>Sports</p>
-                    <p className={style.categoriesText} onClick={()=> {setCategory('science')}}>Science</p>
-                    <p className={style.categoriesText} onClick={()=> {setCategory('entertainment')}}>Entertainment</p>
-                    <p className={style.categoriesText} onClick={()=> {setCategory('health')}}>Health</p>
-                    <p className={style.categoriesText} onClick={()=> {setCategory('technology')}}>Technology</p>
+                    <p className={style.categoriesText} onClick={()=> {setCategory('general'); setPage(1);}}>General</p>
+                    <p className={style.categoriesText} onClick={()=> {setCategory('business'); setPage(1);}}>Business</p>
+                    <p className={style.categoriesText} onClick={()=> {setCategory('sports'); setPage(1);}}>Sports</p>
+                    <p className={style.categoriesText} onClick={()=> {setCategory('science'); setPage(1);}}>Science</p>
+                    <p className={style.categoriesText} onClick={()=> {setCategory('entertainment'); setPage(1);}}>Entertainment</p>
+                    <p className={style.categoriesText} onClick={()=> {setCategory('health'); setPage(1);}}>Health</p>
+                    <p className={style.categoriesText} onClick={()=> {setCategory('technology'); setPage(1);}}>Technology</p>
                     </div>
                 )}
             </div>
@@ -96,14 +110,16 @@ const Home = (props) =>{
 
                     <div className={style.Card_Body}>
                         <h5 className={style.Card_Title}>{item.title}</h5>
-                        <a href={item.url} className={style.Card_Link}>READ FULL ARTICLE</a>
+                        <button className={style.Card_Link} onClick={HandleProps()}>
+                        <Link to="/article">READ FULL ARTICLE</Link>
+                        </button>
                     </div>
                 </div>
                 ) })}
         </div>
 
         <div className={style.search}>
-        <button className={style.button} onClick={()=>{setPage(page+20); fetchNews()}}>Load More</button>
+        <button className={style.button} onClick={()=>{setPage(page+1)}}>Load More</button>
         </div>
     </div>
     </Layout>

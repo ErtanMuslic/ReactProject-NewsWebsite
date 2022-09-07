@@ -1,8 +1,10 @@
 .article{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 
 .articleBox{
     display: flex;
@@ -11,5 +13,21 @@
     align-items: center;
     border: 1px solid black;
     width: 40%;
-    height: 50vh;
+    margin: 2%
+}
+
+.articleButton{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: royalblue;
+    margin: 2%;
+    width: 40%;
+    height: 10vh;
+    cursor: pointer;
+}
+
+.articleLink{
+    text-decoration: none;
+    color: white;
+    font-size: 35px;
 }
