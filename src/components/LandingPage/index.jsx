@@ -14,8 +14,6 @@ import Page404 from "../Page 404";
     const [author,setAuthor] = useState("No Author");
     const [content ,setContent] = useState("No Content");
     const [desc,setDesc] = useState("No Descripiton");
-    const [source,setSource] = useState("No Source");
-    const [date,setDate] = useState("No date");
 
   return (
     <BrowserRouter>
@@ -31,10 +29,6 @@ import Page404 from "../Page 404";
       setContent,
       desc,
       setDesc,
-      source,
-      setSource,
-      date,
-      setDate
       }}>
     <Routes>
      <Route path="/" element={<Home/>}/>

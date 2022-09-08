@@ -1,9 +1,7 @@
-import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import apiNews from "../../api/Api";
-import { UserContext } from "../LandingPage";
+import Card from "../Card";
 import Layout from "../Layout";
 import style from "./home.module.css"
 
@@ -14,10 +12,10 @@ const Home = (props) =>{
     const [category,setCategory] = useState('general');
     const [newcategory,SetnewCategory] = useState('popularity');
     const [drop,setdrop] = useState(false);
-    const {setTitle,setImg,setAuthor,setContent,setDesc,setSource,setDate} = useContext(UserContext);
+    // const {setTitle,setImg,setAuthor,setContent,setDesc,setDate} = useContext(UserContext);
 
 
-    const fetchNews = async (props) =>{
+    const fetchNews = async () =>{
         try{
             let result;
             if(search!==''){
@@ -38,15 +36,15 @@ const Home = (props) =>{
         }
     }
 
-    const HandleProps = () =>{
-        setImg(props.img);
-        setTitle(props.title);
-        setContent(props.content);
-        setAuthor(props.author);
-        setDesc(props.description);
-        setDate(props.publishedAt);
-        setSource(props.source);
-    };
+    // const HandleProps = () =>{
+    //     setImg(news.img);
+    //     setTitle(news.title);
+    //     setContent(news.content);
+    //     setAuthor(news.author);
+    //     setDesc(news.description);
+    //     setDate(news.publishedAt);
+    //     setSource(news.source);
+    // };
 
     useEffect(() =>{
          fetchNews();
@@ -105,16 +103,24 @@ const Home = (props) =>{
         <div className={style.Cards}>
             {news.map((item,index) =>{
                 return (
-                <div key={index} className={style.Card}>  
-                    <img className={style.Card_Image} src={item.urlToImage} alt="" />
+                    <Card
+                    key={index}
+                    img={item.urlToImage}
+                    title={item.title}
+                    desc={item.description}
+                    author={item.author}
+                    content={item.content}
+                    />
+                // <div key={index} className={style.Card}>  
+                //     <img className={style.Card_Image} src={item.urlToImage} alt="" />
 
-                    <div className={style.Card_Body}>
-                        <h5 className={style.Card_Title}>{item.title}</h5>
-                        <button className={style.Card_Link} onClick={HandleProps()}>
-                        <Link to="/article">READ FULL ARTICLE</Link>
-                        </button>
-                    </div>
-                </div>
+                //     <div className={style.Card_Body}>
+                //         <h5 className={style.Card_Title}>{item.title}</h5>
+                //         <button className={style.Card_Link}>
+                //         <Link to="/article">READ FULL ARTICLE</Link>
+                //         </button>
+                //     </div>
+                // </div>
                 ) })}
         </div>
 
