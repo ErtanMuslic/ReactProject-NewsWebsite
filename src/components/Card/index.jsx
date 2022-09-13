@@ -18,7 +18,7 @@ const Card =(props) =>{
 
     <div className={style.Card_Body}>
         <h5>{props.title}</h5>
-        <button className={style.Card_Link} onClick={HandleProps()}>
+        <button className={style.Card_Link} onClick={HandleProps}>
         <Link className={style.Card_Link_Text} to="/article">READ FULL ARTICLE</Link>
         </button>
     </div>
