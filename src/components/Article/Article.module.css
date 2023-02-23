@@ -1,0 +1,38 @@
+.article{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.articleBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 50%;
+    margin: 2%;
+    background-color: gainsboro;
+}
+
+.articleButton{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: royalblue;
+    margin: 2%;
+    width: 40%;
+    height: 10vh;
+    cursor: pointer;
+}
+
+.articleLink{
+    text-decoration: none;
+    color: white;
+    font-size: 35px;
+}
+
+.articleText{
+    font-style: italic;   
+}
